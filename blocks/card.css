@@ -1,0 +1,41 @@
+.card{
+    width: 282px;
+    height: 361px;
+    background-color: white;
+    border-radius: 10px;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.card__image{
+    width: 282px;
+    height: 282px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card__caption{
+    color: black;
+    max-width: 219px;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-left: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card__button{
+    height: 18px;
+    width: 21px;
+    position: relative;
+    left: 246px;
+    bottom: 40px;
+    transition: .1s ease-in-out;
+}
+
+.card__button:hover{
+    opacity: 50%;
+}
