@@ -6,68 +6,79 @@
     <meta name="author" content="Zachary Wedel">
     <meta name="description" content="A site where you can upload images regarding travel around the United States!">
     <meta name="keywords" content="Travel, US, Images, Scenery, Discovery, America">
-    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./pages/index.css">
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <title>Around the US</title>
 </head>
-<body style="background-color: black;">
-    <div class="page">
-        <header class="header">
-           <img src="./images/aroundtheusheaderlogo.svg" alt="Around the US" class="header__logo"> 
-        </header>
+<body class="page">
+    <header class="header">
+        <img src="./images/aroundtheusheaderlogo.svg" alt="Around the US" class="header__logo"> 
+    </header>
 
-        <main class="content">
-            <section class="profile">
-                <img src="./images/jacques-cousteau.jpg" alt="Jacques Cousteau" class="profile__avatar">
-                <div class="profile__info">
-                    <h1 class="profile__name">Jacques Cousteau</h1>
-                    <p class="profile__occupation">Explorer</p>
-                    <div class="profile__editbutton">
-                        <img src="./images/edit-button-vector.svg" alt="Edit button icon" class="profile__editbutton_icon">
-                    </div>
+    <main class="content">
+        <section class="profile">
+            <img src="./images/jacques-cousteau.jpg" alt="Jacques Costeau" class="profile__avatar">
+            <div class="profile__info">
+                <div class="profile__wrapper">
+                    <h1 class="profile__name" id="user-name">Jacques Costeau</h1>
+                    <button type="button" class="profile__edit-button" id="edit-button"></button>
                 </div>
-                
-                <div class="profile__addbutton">
-                    <img src="./images/add-button-vector.svg" alt="Add button icon" class="profile__addbutton_icon">
-                    
-                </div>
-            </section>
-            <section class="elements">
-                <div class="elements card">
-                    <img src="./images/yosemite-valley.jpg" alt="Yosemite Valley" class="card__image">
-                    <h2 class="card__caption">Yosemite Valley</h2>
-                    <img class="card__button" src="./images/button-like.svg" alt="Like Button">
-                </div>
-                <div class="elements card">
-                    <img src="./images/lake-louise.png" alt="Lake Louise" class="card__image">
-                    <h2 class="card__caption">Lake Louise</h2>
-                    <img class="card__button" src="./images/button-like.svg" alt="Like Button">
-                </div>
-                <div class="elements card">
-                    <img src="./images/bald-mountains.png" alt="Bald Mountains" class="card__image">
-                    <h2 class="card__caption">Bald Mountains</h2>
-                    <img class="card__button" src="./images/button-like.svg" alt="Like Button">
-                </div>
-                <div class="elements card">
-                    <img src="./images/latemar.png" alt="Latemar" class="card__image">
-                    <h2 class="card__caption">Latemar</h2>
-                    <img class="card__button" src="./images/button-like.svg" alt="Like Button">
-                </div>
-                <div class="elements card">
-                    <img src="./images/vanoise-national-park.png" alt="vanoise national park" class="card__image">
-                    <h2 class="card__caption">Vanoise National Park</h2>
-                    <img class="card__button" src="./images/button-like.svg" alt="Like Button">
-                </div>
-                <div class="elements card">
-                    <img src="./images/lago-di-braies.png" alt="Lago di Braise" class="card__image">
-                    <h2 class="card__caption">Lago di Braise</h2>
-                    <img class="card__button" src="./images/button-like.svg" alt="Like Button">
-                </div>
-            </section>
-        </main>
-        <footer class="footer">
-            <h3 class="footer__copyright">&copy; 2023 Around The U.S.</h3>
-        </footer>
+                <p class="profile__occupation" id="user-career">Explorer</p>
+            </div>
+            <button type="button" class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+            <ul class="cards"></ul>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
+    </footer>
+    
+    <div class="modal" id="profile-modal-box">
+        <div class="modal__container">
+            <div class="modal__wrapper">
+                <button class="modal__exit-button" type="button"></button>
+            </div>
+            <h2 class="modal__title">Edit profile</h2>
+            <form class="modal__form" id="profile__modal-form">
+                <label for="modal__input-name"></label>
+                    <input type="text" id="profile-modal__input-name" placeholder="Name" class="modal__input" required>
+
+                <label for="modal__input-description"></label>
+                    <input type="text" id="profile-modal__input-description" placeholder="Description" class="modal__input" required>
+
+                <button class="modal__save-button" id="profile-modal-save-button" type="submit">Save</button>
+            </form>
+        </div>
     </div>
+    <div class="modal" id="add-modal-box">
+        <div class="modal__container">
+            <div class="modal__wrapper">
+                <button class="modal__exit-button" type="button"></button>
+            </div>
+            <h2 class="modal__title">New Place</h2>
+            <form class="modal__form" id="profile__modal-form">
+                <label for="modal__input-name"></label>
+                    <input type="text" id="add-modal__input-name" placeholder="Title" class="modal__input" required>
+
+                <label for="modal__input-description"></label>
+                    <input type="text" id="add-modal__input-description" placeholder="Image link" class="modal__input" required>
+
+                <button class="modal__save-button" id="add-modal-save-button" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+    <template id="card-template">
+        <li class="card">
+            <img src="" alt="" class="card__image">
+            <div class="card__wrapper">
+                <h2 class="card__caption"></h2>
+                <button type="button" class="card__button"></button>
+            </div>
+        </li>
+    </template>
+
+    <script src="./scripts/index.js" defer></script>
 </body>
 </html>

@@ -1,41 +1,50 @@
 .card{
-    width: 282px;
-    height: 361px;
     background-color: white;
     border-radius: 10px;
-    display: inline;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
 }
 
 .card__image{
-    width: 282px;
-    height: 282px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    background-size: cover;
+    height: 282px;
+    width: 100%;
+}
+
+.card__wrapper{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 22px 0px 25px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .card__caption{
     color: black;
-    max-width: 219px;
+    max-width: 80%;
     font-weight: 900;
     font-size: 24px;
     line-height: 1.2;
-    margin-left: 20px;
+    margin: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
 .card__button{
+    border: none;
     height: 18px;
     width: 21px;
-    position: relative;
-    left: 246px;
-    bottom: 40px;
     transition: .1s ease-in-out;
+    background: transparent url(../images/button-like.svg) center;
 }
 
 .card__button:hover{
     opacity: 50%;
+    cursor: pointer;
 }
