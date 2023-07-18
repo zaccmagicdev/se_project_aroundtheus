@@ -52,8 +52,6 @@
     margin: 0;
 }
 
-
-
 .modal__title{
     margin: 0;
     font-weight: 900;
@@ -99,6 +97,7 @@
     display: flex;
     gap: 10px;
     flex-direction: column;
+
 }
 
 .modal__enlarged-image{
@@ -128,6 +127,11 @@
         padding: 25px 22px;
     }
 
+    .modal__wrapper{
+        left: 260px;
+        bottom: 60px;
+    }
+
     .modal__exit-button{
         width: 26px;
         height: 26px;
@@ -150,7 +154,7 @@
 
 @media screen and (max-width: 920px){
     .modal__img-wrapper{
-        left: 290px;
+        left: 240px;
         bottom: 20px;
     }
     
@@ -160,10 +164,10 @@
     }
 
     .modal__enlarged-wrapper{
-        max-width: 282px;
+        max-width: 240px;
     }
 
     .modal__enlarged-image{
-        max-width: 282px;
+        max-width: 240px;
     }
 }
