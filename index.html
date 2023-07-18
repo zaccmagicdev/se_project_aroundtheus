@@ -58,27 +58,40 @@
                 <button class="modal__exit-button" type="button"></button>
             </div>
             <h2 class="modal__title">New Place</h2>
-            <form class="modal__form" id="profile__modal-form">
+            <form class="modal__form" id="add-image__modal-form">
                 <label for="modal__input-name"></label>
                     <input type="text" id="add-modal__input-name" placeholder="Title" class="modal__input" required>
 
                 <label for="modal__input-description"></label>
-                    <input type="text" id="add-modal__input-description" placeholder="Image link" class="modal__input" required>
+                    <input type="text" id="add-modal__input-link" placeholder="Image link" class="modal__input" required>
 
-                <button class="modal__save-button" id="add-modal-save-button" type="submit">Save</button>
+                <button class="modal__save-button" id="add-modal-create-button" type="submit">Create</button>
             </form>
         </div>
     </div>
+    <div class="modal" id="enlarged-modal-box">
+        <figure class="modal__enlarged-wrapper">
+            <div class="modal__wrapper modal__img-wrapper">
+                <button class="modal__exit-button modal__exit-img-button" type="button"></button>
+            </div>
+            <img src="" alt="" class="modal__enlarged-image">
+            <figcaption class="modal__enlarged-text"></figcaption>
+        </figure>
+    </div>
     <template id="card-template">
         <li class="card">
-            <img src="" alt="" class="card__image">
+            <button type="button" class="card-image__button" id="card-image-button">
+                <img src="" alt="" class="card__image">
+            </button>
+            <div class="card__button-wrapper">
+                    <button type="button" class="card__delete-button"></button>
+                </div>
             <div class="card__wrapper">
                 <h2 class="card__caption"></h2>
-                <button type="button" class="card__button"></button>
+                <button type="button" class="card__like-button"></button>
             </div>
         </li>
     </template>
-
     <script src="./scripts/index.js" defer></script>
 </body>
 </html>
