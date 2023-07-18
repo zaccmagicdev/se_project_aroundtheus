@@ -37,8 +37,8 @@
 }
 
 .modal__img-wrapper{
-    left: 810px;
-    bottom: 40px;
+    left: 800px;
+    bottom: 30px;
 }
 
 .modal__exit-button{
@@ -155,7 +155,7 @@
 @media screen and (max-width: 920px){
     .modal__img-wrapper{
         left: 240px;
-        bottom: 20px;
+        bottom: 15px;
     }
     
     .modal__exit-img-button{

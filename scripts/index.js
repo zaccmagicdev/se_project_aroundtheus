@@ -2,19 +2,19 @@
 const initialCards = [{
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-},{
+}, {
     name: "Lake Louise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-},{
+}, {
     name: "Bald Mountains",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-},{
+}, {
     name: "Latemar",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-},{
+}, {
     name: "Vanoise National Park",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-},{
+}, {
     name: "Lago di Braise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
 }];
@@ -45,10 +45,10 @@ const cardListElements = document.querySelector('.cards');
 
 
 //section for required functions
-function getCardElement(cardData){
+function getCardElement(cardData) {
     const cardElement = cardTemplate.cloneNode(true);
     let cardCaption = cardElement.querySelector('.card__caption');
-    let cardImage = cardElement.querySelector('.card__image');
+    const cardImage = cardElement.querySelector('.card__image');
     const cardLikeButton = cardElement.querySelector('.card__like-button');
     const cardDeleteButton = cardElement.querySelector('.card__delete-button');
     const cardImageButton = cardElement.querySelector('#card-image-button');
@@ -76,11 +76,11 @@ function getCardElement(cardData){
     return cardElement;
 }
 
-function openModal(modal){
+function openModal(modal) {
     modal.classList.add('modal__opened');
 }
 
-function closeModal(modal){
+function closeModal(modal) {
     modal.classList.remove('modal__opened')
 }
 
@@ -119,22 +119,19 @@ addImageEditForm.addEventListener("submit", (e) => {
     const name = userImageTitle.value;
     const link = userImageLink.value;
 
-    if(!link.includes("https")){
-        alert("Please enter a valid image link!");
-    } else {
-
     const newCard = getCardElement({
         name,
         link,
     });
 
     cardListElements.prepend(newCard);
+    addImageEditForm.reset();
     closeModal(addImageModalBox);
-    }
+
 });
 
 //initializing and adding our cards to the list
 initialCards.forEach((cardData) => {
-   const cardElement = getCardElement(cardData);
-   cardListElements.append(cardElement);
+    const cardElement = getCardElement(cardData);
+    cardListElements.append(cardElement);
 });
