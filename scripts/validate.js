@@ -34,7 +34,6 @@ function hasValidInput(inputList) {
 
 const toggleButtonState = (inputElements, submitButton, { inactiveButtonClass }) => {
     if (hasValidInput(inputElements)) {
-        console.log(inputElements);
         submitButton.classList.add(inactiveButtonClass);
     } else {
         submitButton.classList.remove(inactiveButtonClass);
