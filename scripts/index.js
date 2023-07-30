@@ -127,7 +127,6 @@ addImageEditForm.addEventListener("submit", (e) => {
     cardListElements.prepend(newCard);
     addImageEditForm.reset();
     closeModal(addImageModalBox);
-
 });
 
 //initializing and adding our cards to the list

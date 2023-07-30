@@ -1,97 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=yes">
-    <meta name="author" content="Zachary Wedel">
-    <meta name="description" content="A site where you can upload images regarding travel around the United States!">
-    <meta name="keywords" content="Travel, US, Images, Scenery, Discovery, America">
-    <link rel="stylesheet" href="./pages/index.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=yes" />
+    <meta name="author" content="Zachary Wedel" />
+    <meta
+      name="description"
+      content="A site where you can upload images regarding travel around the United States!"
+    />
+    <meta
+      name="keywords"
+      content="Travel, US, Images, Scenery, Discovery, America"
+    />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <title>Around the US</title>
-</head>
-<body class="page">
+  </head>
+  <body class="page">
     <header class="header">
-        <img src="./images/aroundtheusheaderlogo.svg" alt="Around the US" class="header__logo"> 
+      <img
+        src="./images/aroundtheusheaderlogo.svg"
+        alt="Around the US"
+        class="header__logo"
+      />
     </header>
 
     <main class="content">
-        <section class="profile">
-            <img src="./images/jacques-cousteau.jpg" alt="Jacques Costeau" class="profile__avatar">
-            <div class="profile__info">
-                <div class="profile__wrapper">
-                    <h1 class="profile__name" id="user-name">Jacques Costeau</h1>
-                    <button type="button" class="profile__edit-button" id="edit-button"></button>
-                </div>
-                <p class="profile__occupation" id="user-career">Explorer</p>
-            </div>
-            <button type="button" class="profile__add-button"></button>
-        </section>
-        <section class="elements">
-            <ul class="cards"></ul>
-        </section>
+      <section class="profile">
+        <img
+          src="./images/jacques-cousteau.jpg"
+          alt="Jacques Costeau"
+          class="profile__avatar"
+        />
+        <div class="profile__info">
+          <div class="profile__wrapper">
+            <h1 class="profile__name" id="user-name">Jacques Costeau</h1>
+            <button
+              type="button"
+              class="profile__edit-button"
+              id="edit-button"
+            ></button>
+          </div>
+          <p class="profile__occupation" id="user-career">Explorer</p>
+        </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
+      <section class="elements">
+        <ul class="cards"></ul>
+      </section>
     </main>
     <footer class="footer">
-        <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
+      <p class="footer__copyright">&copy; 2023 Around The U.S.</p>
     </footer>
-    
+
     <div class="modal" id="profile-modal-box">
-        <div class="modal__container">
-            <div class="modal__wrapper">
-                <button class="modal__exit-button" type="button"></button>
-            </div>
-            <h2 class="modal__title">Edit profile</h2>
-            <form class="modal__form" id="profile__modal-form">
-                <label for="profile-modal__input-name"></label>
-                    <input type="text" id="profile-modal__input-name" placeholder="Name" class="modal__input" name="profile-modal-username" required>
-
-                <label for="profile-modal__input-description"></label>
-                    <input type="text" id="profile-modal__input-description" placeholder="Description" class="modal__input" name="profile-modal-desc" required>
-
-                <button class="modal__save-button" id="profile-modal-save-button" type="submit">Save</button>
-            </form>
+      <div class="modal__container">
+        <div class="modal__wrapper">
+          <button class="modal__exit-button" type="button"></button>
         </div>
+        <h2 class="modal__title">Edit profile</h2>
+        <form class="modal__form" id="profile__modal-form" novalidate>
+          <label for="profile-modal__input-name">
+            <input
+              type="text"
+              id="profile-modal__input-name"
+              placeholder="Name"
+              class="modal__input"
+              name="profile-modal-username"
+              required
+              minlength="2"
+              maxlength="40"
+            />
+            <div class="modal__input_error-wrapper">
+            <span class="modal__input_error" id="profile-modal__input-name-error"></span>
+          </div>
+          </label>
+
+          <label for="profile-modal__input-description">
+            <input
+              type="text"
+              id="profile-modal__input-description"
+              placeholder="Description"
+              class="modal__input"
+              name="profile-modal-desc"
+              required
+              minlength="2"
+              maxlength="200"
+            />
+            <div class="modal__input_error-wrapper">
+              <span class="modal__input_error" id="profile-modal__input-description-error"></span>
+            </div>
+          </label>
+
+          <button
+            class="modal__button"
+            id="profile-modal-save-button"
+            type="submit"
+          >
+            Save
+          </button>
+        </form>
+      </div>
     </div>
     <div class="modal" id="add-modal-box">
-        <div class="modal__container">
-            <div class="modal__wrapper">
-                <button class="modal__exit-button" type="button"></button>
-            </div>
-            <h2 class="modal__title">New Place</h2>
-            <form class="modal__form" id="add-image__modal-form">
-                <label for="add-modal__input-name"></label>
-                    <input type="text" id="add-modal__input-name" placeholder="Title" class="modal__input" name="add-img-title" required>
-
-                <label for="add-modal__input-link"></label>
-                    <input type="url" id="add-modal__input-link" placeholder="Image link" class="modal__input" name="add-img-link" required>
-
-                <button class="modal__save-button" id="add-modal-create-button" type="submit">Create</button>
-            </form>
+      <div class="modal__container">
+        <div class="modal__wrapper">
+          <button class="modal__exit-button" type="button"></button>
         </div>
+        <h2 class="modal__title">New Place</h2>
+        <form class="modal__form" id="add-image__modal-form" novalidate>
+          <label for="add-modal__input-name">
+            <input
+              type="text"
+              id="add-modal__input-name"
+              placeholder="Title"
+              class="modal__input"
+              name="add-img-title"
+              required
+              minlength="1"
+              maxlength="30"
+            />
+            <div class="modal__input_error-wrapper">
+              <span class="modal__input_error" id="add-modal__input-name-error"></span>
+            </div>
+          </label>
+
+          <label for="add-modal__input-link">
+            <input
+              type="url"
+              id="add-modal__input-link"
+              placeholder="Image link"
+              class="modal__input"
+              name="add-img-link"
+              required
+            />
+            <div class="modal__input_error-wrapper">
+              <span class="modal__input_error" id="add-modal__input-link-error"></span>
+            </div>
+          </label>
+
+          <button
+            class="modal__button"
+            id="add-modal-create-button"
+            type="submit"
+          >
+            Create
+          </button>
+        </form>
+      </div>
     </div>
     <div class="modal" id="enlarged-modal-box">
-        <figure class="modal__enlarged-wrapper">
-            <div class="modal__wrapper modal__img-wrapper">
-                <button class="modal__exit-button modal__exit-img-button" type="button"></button>
-            </div>
-            <img src="#" alt="#" class="modal__enlarged-image">
-            <figcaption class="modal__enlarged-text"></figcaption>
-        </figure>
+      <figure class="modal__enlarged-wrapper">
+        <div class="modal__wrapper modal__img-wrapper">
+          <button
+            class="modal__exit-button modal__exit-img-button"
+            type="button"
+          ></button>
+        </div>
+        <img src="#" alt="#" class="modal__enlarged-image" />
+        <figcaption class="modal__enlarged-text"></figcaption>
+      </figure>
     </div>
     <template id="card-template">
-        <li class="card">
-            <button type="button" class="card-image__button" id="card-image-button">
-                <img src="" alt="" class="card__image">
-            </button>
-            <div class="card__button-wrapper">
-                    <button type="button" class="card__delete-button"></button>
-                </div>
-            <div class="card__wrapper">
-                <h2 class="card__caption"></h2>
-                <button type="button" class="card__like-button"></button>
-            </div>
-        </li>
+      <li class="card">
+        <button type="button" class="card-image__button" id="card-image-button">
+          <img src="" alt="" class="card__image" />
+        </button>
+        <div class="card__button-wrapper">
+          <button type="button" class="card__delete-button"></button>
+        </div>
+        <div class="card__wrapper">
+          <h2 class="card__caption"></h2>
+          <button type="button" class="card__like-button"></button>
+        </div>
+      </li>
     </template>
     <script src="./scripts/index.js" defer></script>
-</body>
+    <script src="./scripts/validate.js" defer></script>
+  </body>
 </html>
