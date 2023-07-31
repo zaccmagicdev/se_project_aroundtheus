@@ -79,11 +79,6 @@
     margin: 0;
 }
 
-.modal__input-error-wrapper{
-    position: relative;
-    margin: 0;
-}
-
 .modal__input-error{
     font-size: 12px;
     color: red;
@@ -91,6 +86,7 @@
     opacity: 0;
     margin: 0;
     position: absolute;
+    max-width: 250px;
 }
 
 .modal__input_error_visible{
@@ -173,6 +169,10 @@
 
     .modal__form{
         height: 70%;
+    }
+
+    .modal__input-error{
+        width: 100%;
     }
 
     .modal__button{
