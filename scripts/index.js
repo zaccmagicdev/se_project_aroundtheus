@@ -25,6 +25,7 @@ const addImageButton = document.querySelector('.profile__add-button');
 const profileModalBox = document.querySelector('#profile-modal-box');
 const addImageModalBox = document.querySelector('#add-modal-box');
 const enlargedModalBox = document.querySelector('#enlarged-modal-box');
+const modalsByArray = document.querySelectorAll('.modal');
 const enlargedModalImg = enlargedModalBox.querySelector('.modal__enlarged-image');
 const enlargedModalTxt = enlargedModalBox.querySelector('.modal__enlarged-text');
 const enlargedModalExitButton = enlargedModalBox.querySelector('.modal__exit-button');
@@ -47,7 +48,7 @@ const cardListElements = document.querySelector('.cards');
 //section for required functions
 function getCardElement(cardData) {
     const cardElement = cardTemplate.cloneNode(true);
-    let cardCaption = cardElement.querySelector('.card__caption');
+    const cardCaption = cardElement.querySelector('.card__caption');
     const cardImage = cardElement.querySelector('.card__image');
     const cardLikeButton = cardElement.querySelector('.card__like-button');
     const cardDeleteButton = cardElement.querySelector('.card__delete-button');
@@ -77,12 +78,29 @@ function getCardElement(cardData) {
 }
 
 function openModal(modal) {
-    modal.classList.add('modal__opened');
+    modal.classList.add('modal_opened');
+    document.addEventListener('keydown', closeOnEscape);
 }
 
 function closeModal(modal) {
-    modal.classList.remove('modal__opened')
+    modal.classList.remove('modal_opened');
+    document.removeEventListener('keydown', closeOnEscape);
 }
+
+function closeOnEscape(evt) {
+    if (evt.key == "Escape") {
+        const openedModal = document.querySelector('.modal_opened');
+        closeModal(openedModal);
+    }
+}
+
+modalsByArray.forEach((modal) => {
+    modal.addEventListener('mousedown', (e) => {
+        if (modal.classList.contains('modal_opened') && e.target === modal) {
+            closeModal(modal);
+        }
+    });
+});
 
 //section for event handlers
 editButton.addEventListener("click", () => {

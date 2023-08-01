@@ -1,5 +1,4 @@
 const config = ({
-    modalBackground: ".modal",
     formSelector: ".modal__form",
     inputSelector: ".modal__input",
     submitButtonSelector: ".modal__button",
@@ -35,15 +34,17 @@ function hasValidInput(inputList) {
 const toggleButtonState = (inputElements, submitButton, { inactiveButtonClass }) => {
     if (hasValidInput(inputElements)) {
         submitButton.classList.add(inactiveButtonClass);
+        submitButton.setAttribute('disabled', true);
     } else {
         submitButton.classList.remove(inactiveButtonClass);
+        submitButton.removeAttribute('disabled', true);
     }
 };
 
 function setEventListeners(formElement, options) {
-    const { inputSelector } = options;
+    const { inputSelector, submitButtonSelector } = options;
     const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
-    const submitButton = formElement.querySelector(".modal__button");
+    const submitButton = formElement.querySelector(submitButtonSelector);
     toggleButtonState(inputElements, submitButton, options);
 
     inputElements.forEach((input) => {
@@ -57,24 +58,12 @@ function setEventListeners(formElement, options) {
 
 function enableValidation(options) {
     const forms = Array.from(document.querySelectorAll(options.formSelector));
-    const backgrounds = Array.from(document.querySelectorAll(options.modalBackground));
     forms.forEach((form) => {
         form.addEventListener("submit", (e) => {
             e.preventDefault;
         });
         setEventListeners(form, options);
     });
-    backgrounds.forEach((background => {
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                closeModal(background);
-            }
-        });
-
-        background.addEventListener("click", (e) => {
-            closeModal(e.target);
-        });
-    }));
 }
 
 enableValidation(config);
