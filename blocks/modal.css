@@ -32,13 +32,13 @@
 
 .modal__wrapper{
     position: relative;
-    left: 400px;
+    left: 111%;
     bottom: 75px;
 }
 
 .modal__img-wrapper{
     position: relative;
-    left: 800px;
+    left: 100%;
     bottom: 30px;
 }
 
@@ -116,10 +116,11 @@
 
 .modal__enlarged-wrapper{
     margin: 90px auto auto;
-    max-width: 800px;
     display: flex;
     gap: 10px;
     flex-direction: column;
+    max-width: 75vh;
+    max-height: 75vw;
 }
 
 .modal__enlarged-image{
@@ -187,17 +188,6 @@
     .modal__exit-img-button{
         width: 26px;
         height: 26px;
-    }
-
-    .modal__enlarged-wrapper{
-        max-width: 240px;
-    }
-}
-
-@media screen and (max-height: 1062px){
-    .modal__img-wrapper{
-        left: 239px;
-        bottom: 26px;
     }
 
     .modal__enlarged-wrapper{
