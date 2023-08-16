@@ -80,6 +80,10 @@
     margin: 0;
 }
 
+.modal__input_type_error{
+    border-bottom-color: red;
+}
+
 .modal__input-error{
     font-size: 12px;
     color: red;
@@ -131,10 +135,6 @@
 .modal__enlarged-text{
    font-size: 12px;
    line-height: 1.2; 
-}
-
-.modal__input:invalid{
-    border-bottom: red 1px solid;
 }
 
 .modal__exit-button:hover{

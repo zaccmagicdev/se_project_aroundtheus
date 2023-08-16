@@ -50,7 +50,7 @@ const formConfig = ({
     inputSelector: ".modal__input",
     submitButtonSelector: ".modal__button",
     inactiveButtonClass: "modal__button_disabled",
-    inputErrorClass: "modal__input_error",
+    inputErrorClass: "modal__input_type_error",
     errorClass: "modal__input_error_visible"
 });
 
@@ -104,9 +104,8 @@ addImageEditForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = userImageTitle.value;
     const link = userImageLink.value;
-    const userCard = new Card({name, link}, "#card-template");
     
-    cardListElements.prepend(userCard.generateCard());
+    cardListElements.prepend(createCard({name, link}));
     addImageEditForm.reset();
     closeModal(addImageModalBox);
 });
