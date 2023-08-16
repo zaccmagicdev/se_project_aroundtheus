@@ -110,7 +110,15 @@
           <button class="modal__exit-button" type="button"></button>
         </div>
         <h2 class="modal__title">New Place</h2>
-        <form class="modal__form" id="add-image__modal-form" novalidate>
+        <form
+          class="modal__form"
+          id="add-image__modal-form"
+          onsubmit="
+          const button = document.querySelector('#add-modal-create-button');
+          button.classList.add('modal__button_disabled')
+          button.setAttribute('disabled', true)"
+          novalidate
+        >
           <label for="add-modal__input-name">
             <input
               type="text"
@@ -181,7 +189,7 @@
         </div>
       </li>
     </template>
-    <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validate.js" defer></script>
+    <script type="module" src="./pages/index.js"></script>
+    <script type="module" src="./components/FormValidator.js"></script>
   </body>
 </html>
