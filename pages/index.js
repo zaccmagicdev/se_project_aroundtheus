@@ -111,8 +111,11 @@ addImageEditForm.addEventListener("submit", (e) => {
     closeModal(addImageModalBox);
 });
 
+const createCard = (cardData) => {
+    const card = new Card(cardData, "#card-template")
+    return card.generateCard()
+  }
 //initializing and adding our cards to the list
 initialCards.forEach((cardData) => {
-    const cardElement = new Card(cardData, "#card-template");
-    cardListElements.append(cardElement.generateCard());
-});
+    cardListElements.append(createCard(cardData));
+})

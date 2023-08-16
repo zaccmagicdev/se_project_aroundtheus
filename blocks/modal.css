@@ -133,6 +133,10 @@
    line-height: 1.2; 
 }
 
+.modal__input:invalid{
+    border-bottom: red 1px solid;
+}
+
 .modal__exit-button:hover{
     opacity: 60%;
     cursor: pointer;
