@@ -1,11 +1,3 @@
-import { openModal } from "../utils/utils.js";
-import PopUpWithImage from "./PopUpWithImage.js";
-
-const enlargedModalBox = document.querySelector('#enlarged-modal-box');
-const enlargedModalImg = enlargedModalBox.querySelector('.modal__enlarged-image');
-const enlargedModalTxt = enlargedModalBox.querySelector('.modal__enlarged-text');
-
-//We will be adding another callback function that will instantiate our image popup class
 
 export default class Card {
     constructor({ name, link }, cardSelector, handleCardClick) {
