@@ -12,14 +12,13 @@
       name="keywords"
       content="Travel, US, Images, Scenery, Discovery, America"
     />
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="icon" href="./favicon.ico" type="image/x-icon" />
     <title>Around the US</title>
   </head>
   <body class="page">
     <header class="header">
       <img
-        src="./images/aroundtheusheaderlogo.svg"
+        src="<%=require('./images/aroundtheusheaderlogo.svg')%>"
         alt="Around the US"
         class="header__logo"
       />
@@ -28,7 +27,7 @@
     <main class="content">
       <section class="profile">
         <img
-          src="./images/jacques-cousteau.jpg"
+          src="<%=require('./images/jacques-cousteau.jpg')%>"
           alt="Jacques Costeau"
           class="profile__avatar"
         />
@@ -59,7 +58,12 @@
           <button class="modal__exit-button" type="button"></button>
         </div>
         <h2 class="modal__title">Edit profile</h2>
-        <form class="modal__form" id="profile__modal-form" novalidate>
+        <form class="modal__form" id="profile__modal-form" 
+        novalidate
+        onsubmit="
+              const editButton = document.querySelector('#profile-modal-save-button');
+              editButton.classList.add('modal__button_disabled')
+              editButton.setAttribute('disabled', true)">
           <label for="profile-modal__input-name">
             <input
               type="text"
@@ -114,9 +118,9 @@
           class="modal__form"
           id="add-image__modal-form"
           onsubmit="
-          const button = document.querySelector('#add-modal-create-button');
-          button.classList.add('modal__button_disabled')
-          button.setAttribute('disabled', true)"
+          const cardButton = document.querySelector('#add-modal-create-button');
+          cardButton.classList.add('modal__button_disabled')
+          cardButton.setAttribute('disabled', true)"
           novalidate
         >
           <label for="add-modal__input-name">
@@ -189,7 +193,5 @@
         </div>
       </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
-    <script type="module" src="./components/FormValidator.js"></script>
   </body>
 </html>

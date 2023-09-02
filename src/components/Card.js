@@ -1,24 +1,18 @@
 import { openModal } from "../utils/utils.js";
+import PopUpWithImage from "./PopUpWithImage.js";
 
 const enlargedModalBox = document.querySelector('#enlarged-modal-box');
 const enlargedModalImg = enlargedModalBox.querySelector('.modal__enlarged-image');
 const enlargedModalTxt = enlargedModalBox.querySelector('.modal__enlarged-text');
 
+//We will be adding another callback function that will instantiate our image popup class
 
 export default class Card {
-    constructor({ name, link }, cardSelector) {
+    constructor({ name, link }, cardSelector, handleCardClick) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
-    }
-
-    _handleEnlargeImage() {
-        // this is going to be where we enable our image modal
-        enlargedModalImg.setAttribute('src', this._link);
-        enlargedModalImg.setAttribute('alt', this._name);
-        enlargedModalTxt.textContent = this._name;
-
-        openModal(enlargedModalBox);
+        this._handleCardClick = handleCardClick;
     }
 
     _handleLikeButton() {
@@ -38,7 +32,7 @@ export default class Card {
             .addEventListener("click", () => { this._handleDeleteCard() });
 
         this._cardElement.querySelector("#card-image-button")
-            .addEventListener("click", () => {this._handleEnlargeImage()});    
+            .addEventListener("click", () => { this._handleCardClick({name: this._name, link: this._link}) });
     }
 
     generateCard() {
