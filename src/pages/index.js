@@ -1,3 +1,13 @@
+//importing what we need
+import {
+    initialCards,
+    editButton,
+    addImageButton,
+    profileEditForm,
+    addImageEditForm
+}
+    from "../utils/constants.js";
+
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -6,56 +16,26 @@ import PopUpWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 
-//our initial array
-const initialCards = [{
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-}, {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-}, {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-}, {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-}, {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-}, {
-    name: "Lago di Braise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-}];
-
-//variables we need
-const editButton = document.querySelector('#edit-button');
-const addImageButton = document.querySelector('.profile__add-button');
-const addImageModalBox = document.querySelector('#add-modal-box');
-const userNameInput = document.querySelector('#profile-modal__input-name');
-const userDescInput = document.querySelector('#profile-modal__input-description');
-const userImageTitle = addImageModalBox.querySelector('#add-modal__input-name');
-const userImageLink = addImageModalBox.querySelector('#add-modal__input-link');
-const profileEditForm = document.querySelector('#profile__modal-form');
-const addImageEditForm = document.querySelector('#add-image__modal-form');
-const cardListElements = document.querySelector('.cards');
-
+//modal related code
+const userInfo = new UserInfo('#user-name', '#user-career');
 const enlargeImageModal = new PopUpWithImage('#enlarged-modal-box');
 
-const addImageModal = new PopUpWithForm("#add-modal-box", () => {
-    const name = userImageTitle.value;
-    const link = userImageLink.value;
-
-    const userCard = new Card({name, link}, "#card-template", function(){
-        enlargeImageModal.open(name, link);
-    });
-    
-    cardListElements.prepend(userCard.generateCard());
+const addImageModal = new PopUpWithForm("#add-modal-box", (data) => {
+    const retreivedData = Object.values(data);
+    cardList.prependItem(createCard({
+        name: retreivedData[0],
+        link: retreivedData[1]
+    }));
     addImageModal.close();
 });
 
-const editProfileModal = new PopUpWithForm("#profile-modal-box", () => {
-    const userInfo = new UserInfo(userNameInput.value, userDescInput.value);
-    userInfo.setUserInfo();
+const editProfileModal = new PopUpWithForm("#profile-modal-box", (data) => {
+    const retreivedData = Object.values(data);
+    userInfo.setUserInfo({
+        name: retreivedData[0],
+        job: retreivedData[1]
+    });
+
     editProfileModal.close();
 });
 
@@ -63,22 +43,26 @@ editProfileModal.setEventListeners();
 addImageModal.setEventListeners();
 enlargeImageModal.setEventListeners();
 
-//instantiating our section class to render our card elements
+//functions
+function createCard(item) {
+    const card = new Card(item, "#card-template", () => {
+        enlargeImageModal.open(item.name, item.link);
+    });
+
+    const cardElement = card.generateCard();
+    return cardElement;
+}
+
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, "#card-template", () => {
-            enlargeImageModal.open(item.name, item.link);
-        });
-        const cardElement = card.generateCard();
-        cardList.addItem(cardElement);
+        cardList.addItem(createCard(item));
     }
-}, cardListElements);
+}, '.cards');
 
 cardList.renderItems();
 
 //Form validation
-
 const formConfig = ({
     formSelector: ".modal__form",
     inputSelector: ".modal__input",
@@ -93,8 +77,6 @@ const editFormValidator = new FormValidator(formConfig, profileEditForm);
 
 addFormValidator.enableValidation();
 editFormValidator.enableValidation();
-
-//other necessities
 
 //section for event handlers
 editButton.addEventListener("click", () => {

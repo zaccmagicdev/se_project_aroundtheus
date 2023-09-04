@@ -12,7 +12,7 @@
       name="keywords"
       content="Travel, US, Images, Scenery, Discovery, America"
     />
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <!--<link rel="icon" href="./favicon.ico" type="image/x-icon" />-->
     <title>Around the US</title>
   </head>
   <body class="page">
@@ -59,11 +59,7 @@
         </div>
         <h2 class="modal__title">Edit profile</h2>
         <form class="modal__form" id="profile__modal-form" 
-        novalidate
-        onsubmit="
-              const editButton = document.querySelector('#profile-modal-save-button');
-              editButton.classList.add('modal__button_disabled')
-              editButton.setAttribute('disabled', true)">
+        novalidate>
           <label for="profile-modal__input-name">
             <input
               type="text"
@@ -117,10 +113,6 @@
         <form
           class="modal__form"
           id="add-image__modal-form"
-          onsubmit="
-          const cardButton = document.querySelector('#add-modal-create-button');
-          cardButton.classList.add('modal__button_disabled')
-          cardButton.setAttribute('disabled', true)"
           novalidate
         >
           <label for="add-modal__input-name">

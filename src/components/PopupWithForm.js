@@ -9,13 +9,9 @@ export default class PopUpWithForm extends Popup{
 
     _getInputValues(){
         //this will get data from the fields with forms
-
-        const inputVals = [];
-        this._modalForm.querySelectorAll('.modal__input').forEach((input) => {
-            inputVals.push(input.value);
-        });
-
-        return inputVals;
+        const _formData = new FormData(this._modalForm);
+        const _inputVals = Object.fromEntries(_formData);
+        return _inputVals;
     }
 
     setEventListeners(){
@@ -24,7 +20,7 @@ export default class PopUpWithForm extends Popup{
         //we can put our submit code in the callback and have the submit fire here
         this._modalForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            this._handleFormSubmit();
+            this._handleFormSubmit(this._getInputValues());
         });
         super.setEventListeners();
     }

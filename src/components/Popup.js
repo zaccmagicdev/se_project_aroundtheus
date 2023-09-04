@@ -1,4 +1,3 @@
-import { openModal, closeModal } from "../utils/utils.js";
 
 export default class Popup {
     constructor(modal) {
@@ -13,12 +12,12 @@ export default class Popup {
     }
 
     open() {
-        openModal(this._modal);
+        this._modal.classList.add('modal_opened');
         document.addEventListener('keydown', this._handleEscClose);
     }
 
     close() {
-        closeModal(this._modal);
+        this._modal.classList.remove('modal_opened');
         document.removeEventListener('keydown', this._handleEscClose);
     }
 
