@@ -8,6 +8,7 @@ import {
 }
     from "../utils/constants.js";
 
+import { formConfig } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -21,19 +22,17 @@ const userInfo = new UserInfo('#user-name', '#user-career');
 const enlargeImageModal = new PopUpWithImage('#enlarged-modal-box');
 
 const addImageModal = new PopUpWithForm("#add-modal-box", (data) => {
-    const retreivedData = Object.values(data);
     cardList.prependItem(createCard({
-        name: retreivedData[0],
-        link: retreivedData[1]
+        name: data["add-img-title"],
+        link: data["add-img-link"]
     }));
     addImageModal.close();
 });
 
 const editProfileModal = new PopUpWithForm("#profile-modal-box", (data) => {
-    const retreivedData = Object.values(data);
     userInfo.setUserInfo({
-        name: retreivedData[0],
-        job: retreivedData[1]
+        name: data["profile-modal-username"],
+        job: data["profile-modal-desc"]
     });
 
     editProfileModal.close();
@@ -61,16 +60,6 @@ const cardList = new Section({
 }, '.cards');
 
 cardList.renderItems();
-
-//Form validation
-const formConfig = ({
-    formSelector: ".modal__form",
-    inputSelector: ".modal__input",
-    submitButtonSelector: ".modal__button",
-    inactiveButtonClass: "modal__button_disabled",
-    inputErrorClass: "modal__input_type_error",
-    errorClass: "modal__input_error_visible"
-});
 
 const addFormValidator = new FormValidator(formConfig, addImageEditForm);
 const editFormValidator = new FormValidator(formConfig, profileEditForm);
