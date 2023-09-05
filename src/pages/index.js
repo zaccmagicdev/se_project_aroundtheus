@@ -4,7 +4,9 @@ import {
     editButton,
     addImageButton,
     profileEditForm,
-    addImageEditForm
+    addImageEditForm,
+    profileEditNameInput,
+    profileEditJobInput
 }
     from "../utils/constants.js";
 
@@ -36,6 +38,8 @@ const editProfileModal = new PopUpWithForm("#profile-modal-box", (data) => {
     });
 
     editProfileModal.close();
+    
+    
 });
 
 editProfileModal.setEventListeners();
@@ -70,6 +74,10 @@ editFormValidator.enableValidation();
 //section for event handlers
 editButton.addEventListener("click", () => {
     editProfileModal.open();
+    //we can try to put that down here
+    profileEditNameInput.value = userInfo.getUserInfo().name;
+    profileEditJobInput.value = userInfo.getUserInfo().job;
+
 });
 
 addImageButton.addEventListener("click", () => {

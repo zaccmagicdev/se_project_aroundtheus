@@ -13,7 +13,6 @@ export default class PopUpWithForm extends Popup{
         const _formData = new FormData(this._modalForm);
         const _inputVals = Object.fromEntries(_formData);
         return _inputVals;
-
     }
 
     setEventListeners(){
@@ -28,7 +27,7 @@ export default class PopUpWithForm extends Popup{
     }
 
     close(){
-        this._modalForm.reset();
         super.close();
+        this._modalForm.reset();
     }
 }
