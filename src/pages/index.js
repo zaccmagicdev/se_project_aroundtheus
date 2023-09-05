@@ -74,10 +74,10 @@ editFormValidator.enableValidation();
 //section for event handlers
 editButton.addEventListener("click", () => {
     editProfileModal.open();
-    //we can try to put that down here
-    profileEditNameInput.value = userInfo.getUserInfo().name;
-    profileEditJobInput.value = userInfo.getUserInfo().job;
-
+   
+    const { name, job } = userInfo.getUserInfo();
+    profileEditNameInput.value = name;
+    profileEditJobInput.value = job;
 });
 
 addImageButton.addEventListener("click", () => {
