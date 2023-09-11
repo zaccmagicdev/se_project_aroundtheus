@@ -1,19 +1,16 @@
 
 export default class Card {
-    constructor({ name, link }, cardSelector, handleCardClick) {
+    constructor({ name, link }, cardSelector, handleCardClick, handleCardDelete) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
+        this._handleDeleteCard = handleCardDelete;
     }
 
     _handleLikeButton() {
         this._cardElement.querySelector(".card__like-button")
             .classList.toggle("card__like-button_clicked");
-    }
-
-    _handleDeleteCard() {
-        this._cardElement.remove();   
     }
 
     _setEventListeners() {

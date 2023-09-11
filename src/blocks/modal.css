@@ -30,10 +30,24 @@
     justify-content: space-between;
 }
 
+.modal__container-confirm{
+    height: 181px;
+    padding: 34px 36px 36px;
+}
+
+.modal__container-avatar{
+    height: 272px;
+    padding: 34px 36px 36px;
+}
+
 .modal__wrapper{
     position: relative;
     left: 111%;
     bottom: 75px;
+}
+
+.modal__wrapper-confirm{
+    bottom: 70px;
 }
 
 .modal__img-wrapper{
@@ -65,6 +79,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.modal__form-avatar{
+    justify-content: space-evenly;
 }
 
 .modal__label{
@@ -154,9 +172,23 @@
         padding: 25px 22px;
     }
 
+    .modal__container-confirm{
+        width: 282px;
+        height: 181px;
+        padding-top: 10px;
+    }
+
+    .modal__container-avatar{
+        height: 272px;
+    }
+
     .modal__wrapper{
         left: 260px;
         bottom: 60px;
+    }
+
+    .modal__wrapper-confirm{
+        bottom: 34px;
     }
 
     .modal__exit-button{

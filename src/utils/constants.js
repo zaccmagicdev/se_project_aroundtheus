@@ -33,3 +33,4 @@ export const profileEditForm = document.querySelector('#profile__modal-form');
 export const addImageEditForm = document.querySelector('#add-image__modal-form');
 export const profileEditNameInput = document.querySelector('#profile-modal__input-name');
 export const profileEditJobInput = document.querySelector('#profile-modal__input-description');
+export const editAvatarButton = document.querySelector('.profile__avatar-button');
