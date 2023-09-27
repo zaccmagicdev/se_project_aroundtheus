@@ -31,7 +31,8 @@ const api = new Api({
     }
 });
 
-console.log(api.getUserData());
+//testing out our requests
+
 
 //modal related code
 const userInfo = new UserInfo('#user-name', '#user-career');
@@ -55,12 +56,8 @@ const editProfileModal = new PopUpWithForm("#profile-modal-box", (data) => {
        
     });
 
-    editProfileModal.close();
-    
-    
+    editProfileModal.close(); 
 });
-
-console.log(api.getInitialCards());
 
 editProfileModal.setEventListeners();
 addImageModal.setEventListeners();
