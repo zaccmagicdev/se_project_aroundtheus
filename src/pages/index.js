@@ -7,7 +7,8 @@ import {
     addImageEditForm,
     profileEditNameInput,
     profileEditJobInput,
-    editAvatarButton
+    editAvatarButton,
+    avatarPicture
 }
     from "../utils/constants.js";
 
@@ -26,20 +27,33 @@ import Api from "../components/Api.js";
 const api = new Api({
     url: 'https://around-api.en.tripleten-services.com/v1',
     headers: {
-        authorization: 'aa5ef577-8c96-4a77-9378-5d70207e734d',
+        authorization: 'a087da59-6aa1-4dbf-8a2c-982e97da6080',
         'Content-Type': 'application/json',
-    }
+    },
 });
 
 //testing out our requests
+function setProfilePicture(){
+    api.getUserData().then(res => avatarPicture.src = res.avatar);
+}
 
+function setProfile(){
+    //api.getUserData().then(res => )
+}
+
+setProfilePicture();
 
 //modal related code
 const userInfo = new UserInfo('#user-name', '#user-career');
 const enlargeImageModal = new PopUpWithImage('#enlarged-modal-box');
 const confirmationModal = new Popup('#confirm-modal');
 const editAvatarModal = new PopUpWithForm('#avatar-edit-modal', (data) =>{
-    console.log(data);
+    //first welll make the request and use whatever is submitted as the link ofc
+    api.updateProfilePic(data["avatar-link"]);
+    setProfilePicture();
+    editAvatarModal.close();
+
+    //we will also intermittnely add a method call here for the 'Saving', same will go for uploading cards
 });
 const addImageModal = new PopUpWithForm("#add-modal-box", (data) => {
     cardList.prependItem(createCard({
@@ -50,12 +64,9 @@ const addImageModal = new PopUpWithForm("#add-modal-box", (data) => {
 });
 
 const editProfileModal = new PopUpWithForm("#profile-modal-box", (data) => {
-    userInfo.setUserInfo({
-        //name: data["profile-modal-username"],
-       //job: data["profile-modal-desc"]
-       
-    });
-
+    api.setProfileData
+    (data["profile-modal-username"], data["profile-modal-desc"]);
+    
     editProfileModal.close(); 
 });
 
@@ -74,6 +85,8 @@ function createCard(item) {
     const cardElement = card.generateCard();
     return cardElement;
 }
+
+//FOR RENDERING CARDS: we will take whatever from the array of cards we get, use that array as it's card count, have link and name come from the server side cards that we uploaded
 
 const cardList = new Section({
     items: initialCards,
@@ -105,6 +118,6 @@ addImageButton.addEventListener("click", () => {
     addImageModal.open();
 });
 
-/*editAvatarButton.addEventListener("click", () => {
+editAvatarButton.addEventListener("click", () => {
     editAvatarModal.open();
-});*/
+});

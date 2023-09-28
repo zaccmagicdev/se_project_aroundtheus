@@ -11,6 +11,7 @@ export default class Card {
     _handleLikeButton() {
         this._cardElement.querySelector(".card__like-button")
             .classList.toggle("card__like-button_clicked");
+            //this is where we will write a tertiry statement to toggle this class and call our api to update the number of likes in a card
     }
 
     _setEventListeners() {

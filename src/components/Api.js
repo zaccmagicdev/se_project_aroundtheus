@@ -5,7 +5,7 @@ export default class Api {
     }
 
     async getUserData(){
-      fetch(this.url + '/users/me', {
+      return fetch(this.url + '/users/me', {
         method: 'GET',
         headers: this.headers
       })
@@ -19,26 +19,73 @@ export default class Api {
     }
 
     async getInitialCards() {
+     return fetch(this.url + '/cards', {
+      method: 'GET',
+      headers: this.headers
+     }).then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      // if the server returns an error, reject the promise
+      return Promise.reject(`Error: ${res.status}`);
+    });
+    }
+
+    async uploadCard(name, link){
       fetch(this.url + '/cards', {
-        method: 'GET',
-        headers: this.headers
+        method: 'POST',
+        headers: this.headers,
+        body: JSON.stringify({
+          name: name,
+          link: link
+        })
       })
-      .then(res => {
-        if(res.ok){
-          return res.json()
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
+    }
+
+    //we may need to change this up depending on how implementation will go
+    //let's also not forget to handle errors for the rest of these
+    async deleteCard(cardId){
+      fetch(this.url + `/cards/${cardId}`, {
+        method: 'DELETE',
+        headers: this.headers
+      }).then(res => {
+        if (res.ok) {
+          return res.json();
         }
-      }).then((data) => console.log(data))
+        // if the server returns an error, reject the promise
+        return Promise.reject(`Error: ${res.status}`);
+      });
     }
 
-    
-    async likeCard(){
+    async getCardsAndUserData(){
+      return Promise.all([this.getInitialCards(), this.getUserData()]);
+    }
+
+    async likeCard(cardId){
       //this will be out method to have likes in a card
+      fetch(this.url + `/cards/${cardId}/likes`, {
+        method: 'PUT',
+        headers: this.headers
+      }).then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        // if the server returns an error, reject the promise
+        return Promise.reject(`Error: ${res.status}`);
+      });
     }
 
-    async unlikeCard(){
-
+    async unlikeCard(cardId){
+      fetch(this.url + `/cards/${cardId}/likes`, {
+        method: 'DELETE',
+        headers: this.headers
+      }).then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        // if the server returns an error, reject the promise
+        return Promise.reject(`Error: ${res.status}`);
+      });
     }
   
     // other methods for working with the API
@@ -50,13 +97,11 @@ export default class Api {
           name: name,
           about: about
         })
-      }).then((res) => res.json())
-      .then((json) => console.log(json))
+      })
     }
 
     async updateProfilePic(url){
-      //this will be out request to set a new profile picture
-      fetch(this.url + '/users/me/avatar', {
+      return fetch(this.url + '/users/me/avatar', {
         method: 'PATCH',
         headers: this.headers,
         body: JSON.stringify({

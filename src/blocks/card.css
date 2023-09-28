@@ -66,12 +66,23 @@
     overflow: hidden;
 }
 
+.card__like-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .card__like-button{
     border: none;
     height: 18px;
     width: 21px;
     transition: .1s ease-in-out;
     background: transparent url(../images/button-like.svg) center;
+}
+
+.card__likes-int{
+    margin: 0;
+    color: black;
 }
 
 .card__like-button_clicked{
