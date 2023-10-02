@@ -35,6 +35,8 @@ const api = new Api({
     },
 });
 
+
+
 //testing out our requests
 function setProfilePicture(){
     api.getUserData().then(res => avatarPicture.src = res.avatar);
@@ -61,12 +63,20 @@ const editAvatarModal = new PopUpWithForm('#avatar-edit-modal', (data) =>{
     editAvatarModal.close();
     //we will also intermittnely add a method call here for the 'Saving', same will go for uploading cards
 });
+
+api.getInitialCards().then((res) => res.forEach((card) => {
+    cardList.prependItem(createCard({
+        name: card.name,
+        link: card.link
+    }))
+}));
+
 const addImageModal = new PopUpWithForm("#add-modal-box", (data) => {
     api.uploadCard(data["add-img-title"], data["add-img-link"])
     .then(cardList.prependItem(createCard({
         name: data["add-img-title"],
         link: data["add-img-link"]
-    })))
+    })));
     addImageModal.close();
 });
 
