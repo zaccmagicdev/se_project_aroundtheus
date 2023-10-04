@@ -52,6 +52,7 @@
     margin: 22px 0px 25px;
     padding-left: 20px;
     padding-right: 20px;
+    max-height: 28.8px;
 }
 
 .card__caption{
