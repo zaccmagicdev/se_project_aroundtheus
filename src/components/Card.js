@@ -1,44 +1,26 @@
 
 export default class Card {
-    constructor({ name, link, id , likes}, cardSelector, handleCardClick, handleCardDelete, handleCardLike) {
+    constructor({ name, link, id, likeStatus}, cardSelector, handleCardClick, handleCardDelete, handleCardLike) {
         this._name = name;
         this._link = link;
         this._id = id;
-        this._likes = likes;
+        this._likeStatus = likeStatus;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this._handleDeleteCard = handleCardDelete;
-        this._handleLikeCard = handleCardLike;
+        this._handleCardLike = handleCardLike;
     }
 
     _handleLikeButton() {
-        const numLikes = this._cardElement.querySelector(".card__likes-int");
         const likeButton = this._cardElement.querySelector(".card__like-button");
         likeButton.classList.toggle("card__like-button_clicked");
-            //this is where we will write a tertiry statement to toggle this class and call our api to update the number of likes in a card
-        if(likeButton.classList.contains("card__like-button_clicked")){
-            this._likes++;
-            numLikes.textContent = this._likes;
-        } else {
-            this._likes--;
-            numLikes.textContent = "";
-        }
-
-    }
-
-    _isLiked(){
-        if(this._cardElement.querySelector(".card__like-button").classList.contains("card__like-button_clicked")){
-            return true;
-        } else {
-            return false;
-        }
     }
 
     _setEventListeners() {
         this._cardElement.querySelector(".card__like-button")
             .addEventListener("click", () => { 
                 this._handleLikeButton()
-                this._handleLikeCard(this._isLiked()) 
+                this._handleCardLike()
             });
 
         this._cardElement.querySelector(".card__delete-button") 
@@ -46,10 +28,21 @@ export default class Card {
 
         this._cardElement.querySelector("#card-image-button")
             .addEventListener("click", () => { this._handleCardClick({name: this._name, link: this._link}) });
+
+        this._checkStatus();    
     }
 
     delete(){
         this._cardElement.remove();
+    }
+
+    _checkStatus(){
+        const likeButton = this._cardElement.querySelector(".card__like-button");
+        if(this._likeStatus){
+            likeButton.classList.add("card__like-button_clicked")
+        } else {
+            likeButton.classList.remove("card__like-button_clicked")
+        }
     }
 
     generateCard() {

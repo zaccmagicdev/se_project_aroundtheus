@@ -32,7 +32,7 @@ export default class Api {
   }
 
   async uploadCard(name, link) {
-    fetch(this.url + '/cards', {
+    return fetch(this.url + '/cards', {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({
@@ -67,7 +67,7 @@ export default class Api {
 
   async likeCard(cardId) {
     //this will be out method to have likes in a card
-    fetch(this.url + `/cards/${cardId}/likes`, {
+    return fetch(this.url + `/cards/${cardId}/likes`, {
       method: 'PUT',
       headers: this.headers
     }).then(res => {
@@ -80,7 +80,7 @@ export default class Api {
   }
 
   async unlikeCard(cardId) {
-    fetch(this.url + `/cards/${cardId}/likes`, {
+    return fetch(this.url + `/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: this.headers
     }).then(res => {
@@ -94,7 +94,7 @@ export default class Api {
 
   // other methods for working with the API
   async setProfileData(name, about) {
-    fetch(this.url + '/users/me', {
+    return fetch(this.url + '/users/me', {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({

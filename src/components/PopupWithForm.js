@@ -17,12 +17,12 @@ export default class PopUpWithForm extends Popup{
         return _inputVals;
     }
 
-    showPatchStatus(){
-        this._modalButton.textContent = "Saving...";
-    }
-
-    removePatchStatus(){
-        this._modalButton.textContent = this._modalButtonText;
+    renderLoading(isLoading){
+        if(isLoading){
+            this._modalButton.textContent = "Saving...";
+        } else {
+            this._modalButton.textContent = this._modalButtonText;
+        }
     }
 
     setEventListeners(){

@@ -2,7 +2,6 @@
 import {
     editButton,
     addImageButton,
-    confirmModalButton,
     profileEditForm,
     addImageEditForm,
     editAvatarForm,
@@ -10,8 +9,6 @@ import {
     profileEditJobInput,
     editAvatarButton,
     avatarPicture,
-    avatarJob,
-    avatarName,
 }
     from "../utils/constants.js";
 
@@ -35,72 +32,65 @@ const api = new Api({
     },
 });
 
+//loading user data
 api.getCardsAndUserData().then((res) => {
     res[0].forEach((card) => {
-        cardList.addItem(createCard({
+        const newCard = createCard({
             name: card.name,
             link: card.link,
             id: card._id,
-            likes: 0
-        }))
+            likeStatus: card.isLiked
+        })
+        cardList.addItem(newCard);
     })
+
     const { avatar, about, name } = res[1];
     avatarPicture.src = avatar;
-    avatarJob.textContent = about;
-    avatarName.textContent = name;
+    userInfo.setUserInfo({name, about});
 })
 
-//testing out our requests
-function setProfilePicture() {
-    api.getUserData().then(res => avatarPicture.src = res.avatar);
-}
-
-function setProfile() {
-    api.getUserData().then((res) => {
-        avatarJob.textContent = res.about;
-        avatarName.textContent = res.name;
-    });
-}
-
-function removeCard(cardElement, cardId) {
-    api.deleteCard(cardId)
-        .then(
-            cardElement.delete()
-        ).catch(err => console.log(err))
-}
-
-//modal related code
+//modal related code and i callbacks
 const userInfo = new UserInfo('#user-name', '#user-career');
+
 const enlargeImageModal = new PopUpWithImage('#enlarged-modal-box');
+
 const confirmationModal = new PopUpWithConfirmation('#confirm-modal', (data) => {
     removeCard(data, data._id);
     confirmationModal.close();
 });
+
 const editAvatarModal = new PopUpWithForm('#avatar-edit-modal', (data) => {
-    editAvatarModal.showPatchStatus();
-    api.updateProfilePic(data["avatar-link"]).then(
-    setProfilePicture())
-    .then(editAvatarModal.removePatchStatus())
-    //.finally(editAvatarModal.close())
+    editAvatarModal.renderLoading(true);
+    api.updateProfilePic(data["avatar-link"])
+    .then(res => avatarPicture.src = res.avatar)
+    .then(editAvatarModal.renderLoading(false))
+    .finally(editAvatarModal.close())
     //we will also intermittnely add a method call here for the 'Saving', same will go for uploading cards
 });
 
 const addImageModal = new PopUpWithForm("#add-modal-box", (data) => {
+    addImageModal.renderLoading(true);
     api.uploadCard(data["add-img-title"], data["add-img-link"])
-        .then(addImageModal.showPatchStatus())
-        .then(cardList.prependItem(createCard({
-            name: data["add-img-title"],
-            link: data["add-img-link"]
-        })))
-        .then(addImageModal.removePatchStatus())
+        .then((res) => {
+            const { name, link, _id, isLiked } = res
+            cardList.prependItem(createCard({
+                name: name,
+                link: link,
+                id: _id,
+                likeStatus: isLiked
+            }))
+        })
+        .then(addImageModal.renderLoading(false))
         .finally(addImageModal.close())
 });
 
 const editProfileModal = new PopUpWithForm("#profile-modal-box", (data) => {
+    editAvatarModal.renderLoading(true);
     api.setProfileData
-        (data["profile-modal-username"], data["profile-modal-desc"]);
-    setProfile();
-    editProfileModal.close();
+    (data["profile-modal-username"], data["profile-modal-desc"])
+    .then(res => userInfo.setUserInfo(res))
+    .then(addImageModal.renderLoading(false))
+    .finally(editProfileModal.close())
 });
 
 editProfileModal.setEventListeners();
@@ -111,24 +101,38 @@ editAvatarModal.setEventListeners();
 
 //functions
 function createCard(item) {
-    const card = new Card(item, "#card-template", () => {
-        enlargeImageModal.open(item.name, item.link);
-    }, () => { confirmationModal.open(card, card._id) },
-        (data) => {
-            if (data) {
-                api.likeCard(item.id)
-            } else {
-                api.unlikeCard(item.id)
+    const card = new Card(item, "#card-template", 
+    () => {enlargeImageModal.open(item.name, item.link)}, 
+    () => { confirmationModal.open(card, card._id) },
+    () => {
+        if (!item.likeStatus) {
+            api.likeCard(item.id).then(res => {
+                updateCardData(item, res.isLiked);
+            })
+        } else {
+            api.unlikeCard(item.id).then(res => {
+                updateCardData(item, res.isLiked);
+            })
             }
-            //if(item.isLiked = true){
-                //this command would need to let the card class know what to update based on
-            //}
-        });
+    });
 
     const cardElement = card.generateCard();
     return cardElement;
 }
 
+function updateCardData(item, newItemData) {
+    item.likeStatus = newItemData;
+}
+
+function removeCard(cardElement, cardId) {
+    api.deleteCard(cardId)
+        .then(
+            cardElement.delete()
+        )
+        .catch(err => console.log(err))
+}
+
+//card rendering section and rendering
 const cardList = new Section({
     items: [],
     renderer: () => { }
@@ -136,6 +140,7 @@ const cardList = new Section({
 
 cardList.renderItems();
 
+//enabling form validation
 const addFormValidator = new FormValidator(formConfig, addImageEditForm);
 const editFormValidator = new FormValidator(formConfig, profileEditForm);
 const avatarFormValidator = new FormValidator(formConfig, editAvatarForm);
