@@ -1,27 +1,29 @@
 import Popup from "./Popup";
 
-export default class PopupWithComfirmation extends Popup{
-    constructor(modal, handleFormSubmit){
+export default class PopupWithConfirmation extends Popup{
+    constructor(modal){
         super(modal);
-        this._handleFormSubmit = handleFormSubmit;
         this._modalForm = this._modal.querySelector('.modal__form');
-        this._submitButton = this._modalForm.querySelector('.modal__button');
+        this._modalButton = this._modal.querySelector('.modal__button');
+        this._modalButtonText = this._modalButton.textContent;
     }
 
-    open(cardElement, cardId){
-        super.open();
-        this._cardElement = cardElement;
-        this._id = cardId;
+    setAction(action){
+        this._handleFormSubmit = action;
     }
 
-    close(){
-        super.close();
+    renderLoading(isLoading){
+        if(isLoading){
+            this._modalButton.textContent = "Deleting...";
+        } else {
+            this._modalButton.textContent = this._modalButtonText;
+        }
     }
 
     setEventListeners(){
         this._modalForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            this._handleFormSubmit(this._cardElement, this._id);
+            this._handleFormSubmit();
         });
         super.setEventListeners();
     }

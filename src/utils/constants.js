@@ -16,4 +16,3 @@ export const editAvatarForm = document.querySelector('#edit-avatar__pic-form');
 export const profileEditNameInput = document.querySelector('#profile-modal__input-name');
 export const profileEditJobInput = document.querySelector('#profile-modal__input-description');
 export const editAvatarButton = document.querySelector('.profile__avatar-button');
-export const avatarPicture = document.querySelector('.profile__avatar');

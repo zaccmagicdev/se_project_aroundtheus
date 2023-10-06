@@ -1,64 +1,46 @@
 export default class Api {
   constructor(options) {
-    this.url = options.url;
-    this.headers = options.headers;
+    this._url = options.url;
+    this._headers = options.headers;
+  }
+
+  _processResponse = (res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
   }
 
   async getUserData() {
-    return fetch(this.url + '/users/me', {
+    return fetch(this._url + '/users/me', {
       method: 'GET',
-      headers: this.headers
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(`Error: ${res.status}`);
-        }
-      })
+      headers: this._headers
+    }).then(this._processResponse)
   }
 
   async getInitialCards() {
-    return fetch(this.url + '/cards', {
+    return fetch(this._url + '/cards', {
       method: 'GET',
-      headers: this.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+      headers: this._headers
+    }).then(this._processResponse)
   }
 
   async uploadCard(name, link) {
-    return fetch(this.url + '/cards', {
+    return fetch(this._url + '/cards', {
       method: 'POST',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         link: link
       })
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._processResponse)
   }
 
   async deleteCard(cardId) {
-    fetch(this.url + `/cards/${cardId}`, {
+    return fetch(this._url + `/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+      headers: this._headers
+    }).then(this._processResponse)
   }
 
   async getCardsAndUserData() {
@@ -67,63 +49,39 @@ export default class Api {
 
   async likeCard(cardId) {
     //this will be out method to have likes in a card
-    return fetch(this.url + `/cards/${cardId}/likes`, {
+    return fetch(this._url + `/cards/${cardId}/likes`, {
       method: 'PUT',
-      headers: this.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+      headers: this._headers
+    }).then(this._processResponse)
   }
 
   async unlikeCard(cardId) {
-    return fetch(this.url + `/cards/${cardId}/likes`, {
+    return fetch(this._url + `/cards/${cardId}/likes`, {
       method: 'DELETE',
-      headers: this.headers
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+      headers: this._headers
+    }).then(this._processResponse)
   }
 
   // other methods for working with the API
   async setProfileData(name, about) {
-    return fetch(this.url + '/users/me', {
+    return fetch(this._url + '/users/me', {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about
       })
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._processResponse)
   }
 
   async updateProfilePic(url) {
-    return fetch(this.url + '/users/me/avatar', {
+    return fetch(this._url + '/users/me/avatar', {
       method: 'PATCH',
-      headers: this.headers,
+      headers: this._headers,
       body: JSON.stringify({
         avatar: url
       })
-    }).then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      // if the server returns an error, reject the promise
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._processResponse)
   }
 }
 
