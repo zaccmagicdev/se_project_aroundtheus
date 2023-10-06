@@ -26,11 +26,10 @@
 
     <main class="content">
       <section class="profile">
-        <img
-          src="<%=require('./images/jacques-cousteau.jpg')%>"
-          alt="Jacques Costeau"
-          class="profile__avatar"
-        />
+        <img src="#" alt="#" class="profile__avatar" />
+        <div class="profile__avatar-wrapper">
+          <button class="profile__avatar-button"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__wrapper">
             <h1 class="profile__name" id="user-name">Jacques Costeau</h1>
@@ -58,8 +57,7 @@
           <button class="modal__exit-button" type="button"></button>
         </div>
         <h2 class="modal__title">Edit profile</h2>
-        <form class="modal__form" id="profile__modal-form" 
-        novalidate>
+        <form class="modal__form" id="profile__modal-form" novalidate>
           <label for="profile-modal__input-name">
             <input
               type="text"
@@ -110,11 +108,7 @@
           <button class="modal__exit-button" type="button"></button>
         </div>
         <h2 class="modal__title">New Place</h2>
-        <form
-          class="modal__form"
-          id="add-image__modal-form"
-          novalidate
-        >
+        <form class="modal__form" id="add-image__modal-form" novalidate>
           <label for="add-modal__input-name">
             <input
               type="text"
@@ -123,7 +117,7 @@
               class="modal__input"
               name="add-img-title"
               required
-              minlength="1"
+              minlength="2"
               maxlength="30"
             />
 
@@ -171,6 +165,61 @@
         <figcaption class="modal__enlarged-text"></figcaption>
       </figure>
     </div>
+
+    <div class="modal" id="confirm-modal">
+      <div class="modal__container modal__container-confirm">
+        <div class="modal__wrapper modal__wrapper-confirm">
+          <button class="modal__exit-button" type="button"></button>
+        </div>
+        <h2 class="modal__title">Are you sure?</h2>
+        <form class="modal__form" id="confirm-modal-form" novalidate>
+          <button
+            class="modal__button"
+            id="modal-confirmation-button"
+            type="submit"
+          >
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="avatar-edit-modal">
+      <div class="modal__container modal__container-avatar">
+        <div class="modal__wrapper">
+          <button class="modal__exit-button" type="button"></button>
+        </div>
+        <h2 class="modal__title">Change profile picture</h2>
+        <form
+          class="modal__form modal__form-avatar"
+          id="edit-avatar__pic-form"
+          novalidate
+        >
+          <label for="edit-avatar__pic">
+            <input
+              type="url"
+              id="edit-avatar__pic"
+              placeholder="Image URL"
+              class="modal__input"
+              name="avatar-link"
+              required
+              minlength="1"
+              maxlength="200"
+            />
+
+            <span class="modal__input-error" id="edit-avatar__pic-error"></span>
+          </label>
+          <button
+            class="modal__button"
+            id="avatar-modal-create-button"
+            type="submit"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <button type="button" class="card-image__button" id="card-image-button">
@@ -181,7 +230,9 @@
         </div>
         <div class="card__wrapper">
           <h2 class="card__caption"></h2>
-          <button type="button" class="card__like-button"></button>
+          <div class="card__like-container">
+            <button type="button" class="card__like-button"></button>
+          </div>
         </div>
       </li>
     </template>
