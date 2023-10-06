@@ -56,7 +56,6 @@ const enlargeImageModal = new PopUpWithImage('#enlarged-modal-box');
 
 const confirmationModal = new PopUpWithConfirmation('#confirm-modal');
 
-
 const editAvatarModal = new PopUpWithForm('#avatar-edit-modal', (data) => {
     editAvatarModal.renderLoading(true);
     api.updateProfilePic(data["avatar-link"])
